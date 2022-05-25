@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Done</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+    <style>
+        *{font-family: 'Gowun Batang', serif;}
+        .group{font-size:60px; text-align:center; margin-top:200px;}
+        .box{ width:200px; height:80px; font-size:50px; background:white; border-radius: 15px;margin:0px 20px; font-weight:bold;}
+        .insert{width:90%;margin:auto;color:brown;font-weight:bold;}
+    </style>
+</head>
+<body>
+    <div class="group">
+        <div class="here">
+            <img src="https://e7.pngegg.com/pngimages/199/694/png-clipart-computer-icons-map-location-sign-cdr-black-thumbnail.png" 
+            style="width:50px; height:50px">
+            현재 고객님의 위치는
+            <div class="insert"></div>
+            입니다.
+        </div>
+
+        <div id="map" style="width:90%;height:650px;position:relative;overflow:hidden;margin:20px auto;"></div>
+
+        <strong>구뜨(gooddrive)</strong> 서비스를
+        <br>
+        이용해주셔서 감사합니다.
+        <br>
+        <button class="box" onclick="location.href='/user'">
+            확인
+        </button>
+    </div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ceb1e710105acfa93e70fad67dd086ef&libraries=services"></script>
+    <script>
+        var receive=JSON.parse(localStorage.getItem("send"));//localStorage에 저장된 send객체값 가져오기
+        var lat, lon, loc;
+        lat=receive.lat;
+        lon=receive.lon;
+        loc=receive.loc;
+
+        var post=document.querySelector('.insert');
+        post.append('"'+loc+'"');
+
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+            center: new kakao.maps.LatLng(lat,lon),// 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
+        };  
+
+        // 지도를 생성합니다  
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        //위치를 좌표로 생성합니다
+        var locPosition = new kakao.maps.LatLng(lat, lon);
+
+        var marker = new kakao.maps.Marker({  // 위치를 표시할 마커입니다
+            map: map, 
+            position: locPosition,
+        }),infowindow = new kakao.maps.InfoWindow({zindex:1});// 위치에 대한 주소를 표시할 인포윈도우입니다
+
+        marker.setMap(map);
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:700px;text-align:center;padding:6px 0;font-size:40px;">'+loc+'</div>'
+        });
+        infowindow.open(map, marker);
+
+    </script>
+</body>
+</html>

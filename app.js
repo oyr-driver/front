@@ -5,7 +5,6 @@ const ejs = require('ejs');
 const app = express();
 const server = http.createServer(app);
 
-const hostname = '172.19.3.9';
 const port = 3000;
 
 app.set('view engine', 'ejs');
@@ -15,6 +14,14 @@ app.get('/user', (req, res) => {
     res.render('index');
 })
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.get('/search', (req, res) => {
+    res.sendFile(__dirname + '/search.html');//html파일 열어주기 위함. __dirname은 약속임
+})
+
+app.get('/done', (req, res) => {
+    res.sendFile(__dirname + '/done.html');
+})
+
+server.listen(port, () => {
+    console.log(`Server running at https://localhost:${port}/user`);
 });
