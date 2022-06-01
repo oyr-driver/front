@@ -10,18 +10,29 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/user', (req, res) => {
-    res.render('index');
+let passID;
+
+app.get('/l/:id', (req, res) => {
+    let id = req.params.id;//id 정보 가져오기
+    passID=id;
+
+    res.render('index',{id:id});
 })
 
-app.get('/search', (req, res) => {
-    res.sendFile(__dirname + '/search.html');//html파일 열어주기 위함. __dirname은 약속임
+app.get('/search/:id', (req, res) => {
+    let id = req.params.id;//id 정보 가져오기
+
+    res.render('search',{id:id});
 })
 
-app.get('/done', (req, res) => {
-    res.sendFile(__dirname + '/done.html');
+app.get('/done/:id', (req, res) => {
+    let id = req.params.id;//id 정보 가져오기
+
+    res.render('done',{id:id});
 })
+
+
 
 server.listen(port, () => {
-    console.log(`Server running at https://localhost:${port}/user`);
+    console.log(`Server running at https://localhost:${port}/l/~id~`);
 });

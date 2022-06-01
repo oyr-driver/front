@@ -16,6 +16,7 @@
     </style>
 </head>
 <body>
+    <div id="pass" style="display:none;"><%=id%></div>
     <div class="group">
         <div class="here">
             <img src="https://e7.pngegg.com/pngimages/199/694/png-clipart-computer-icons-map-location-sign-cdr-black-thumbnail.png" 
@@ -35,17 +36,18 @@
 
         <br>
         <div class="button_group">
-            <button class="box" onclick="location.href='/user'">
+            <button class="box" onclick="movingL();">
                 이전페이지
             </button>
-            <button class="again box" onclick="location.href='/search'" style="display:none;">다시 입력하기</button>
-            <button class="done box" onclick="moving(); location.href='/done'" style="display:none;">
+            <button class="again box" onclick="movingSearch();" style="display:none;">다시 입력하기</button>
+            <button class="done box" onclick="moving(); movingDone();" style="display:none;"><!--id!!!!!!!!!!!!!!!!!!!!!!-->
                 위치 선택 완료
             </button>
         </div>
     </div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ceb1e710105acfa93e70fad67dd086ef&libraries=services"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!--admin서버로 정보 전달 위함-->
     <script>
         var lat, lon, loc;
 
@@ -119,6 +121,34 @@
                 "loc":loc
             };
             localStorage.setItem("send",JSON.stringify(send));//localStorage에 저장해서 다른 파일에서도 사용할 수 있도록
+        }
+
+        var pass=document.getElementById('pass');
+        var id=pass.innerHTML;//값 가져오기
+        
+        function movingL(){
+            location.href=`/l/${id}`;
+        }
+
+        function movingSearch(){
+            location.href=`/search/${id}`;
+        }
+
+        async function movingDone(){
+            /*admin 서버로 정보 전달 위함*/
+            try {
+                await axios.post(`https://admin.goodde.net/api/calls/${id}/location/submit`, {//정보 전달할 페이지
+                    lat: lat,
+                    lon: lon,
+                    addr: loc
+                });
+            }
+            catch(err) {
+                alert(`오류가 발생했습니다.\n${err.message}`);
+                return;
+            }
+
+            location.href=`/done/${id}`;
         }
     </script>
 </body>
