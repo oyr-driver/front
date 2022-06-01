@@ -31,8 +31,6 @@ app.get('/done/:id', (req, res) => {
     res.render('done',{id:id});
 })
 
-
-
 server.listen(port, () => {
     console.log(`Server running at https://localhost:${port}/l/~id~`);
 });
