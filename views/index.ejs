@@ -5,10 +5,10 @@
     <title>goodde</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
     <style>
-        *{font-family: 'Gowun Batang', serif;}
-        .map_group {margin-top:300px; opacity:0;}/*opacity 0은 투명*/
+        *{font-family: 'Gowun Batang', serif 'Nanum Gothic', sans-serif;}
+        .map_group {margin-top:400px; opacity:0;}/*opacity 0은 투명*/
         .here {font-size:60px; margin-left:40px;}
         .check {color:red; font-size:55px; margin-left:40px;}
         .map_wrap {position:relative;width:100%;height:500px;}
@@ -18,12 +18,12 @@
         .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-size:40px;}
         .box_group{text-align:center;}
         .box{ width:350px; height:80px; font-size:50px; background:white; border-radius: 15px;margin:0px 20px;}
-        .loading { text-shadow: 6px 2px 2px gray; }
+        .loading{    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;}
     </style>
 </head>
 <body>
-    <div class="loading" style="font-size:100px; margin-top:1100px; text-align:center;color:rgb(170, 57, 57);">
-        <strong>구뜨(gooddrive)</strong>
+    <div class="loading" style="font-size:100px; margin-top:800px; text-align:center;color:#e9967a;">
+        <strong>구뜨<br>(gooddrive)</strong>
     </div>
     <div class="map_group">
         <div class="here">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <div class="box_group">
             <button class="search box" onclick="location.href='/search'">
                 작성할게요
